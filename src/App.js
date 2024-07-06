@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { useAnyKeyToRender } from './useAnyKeyToRender';
+import React, { useEffect } from "react";
 
 function App() {
   return (
@@ -18,8 +20,27 @@ function App() {
           Learn React
         </a>
       </header>
+      <WordCount>You are not going to believe this but...</WordCount>;
     </div>
+    
   );
 }
+
+function WordCount({ child = "" }) {
+  useAnyKeyToRender();
+  const words = child.split(" ");
+  useEffect(() => {
+    console.log("fresh render");
+  }, [words]);
+  
+  return (
+    <>
+    <p>{child}</p>
+    <p>
+    <strong>{words.length} - words</strong>
+    </p>
+    </>
+  );
+  }
 
 export default App;
